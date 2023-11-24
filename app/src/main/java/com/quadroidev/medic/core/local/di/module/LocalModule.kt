@@ -17,6 +17,7 @@ object LocalModule {
     @Singleton
     fun provideMedicMinderDb(@ApplicationContext context: Context) =
         Room.databaseBuilder(context, MedicMinderDb::class.java, "medic_minder_database")
+            .addTypeConverter(MedicMinderDb::class)
             .build()
 
     @Provides
@@ -30,4 +31,13 @@ object LocalModule {
     @Provides
     @Singleton
     fun provideColorDao(medicMinderDb: MedicMinderDb) = medicMinderDb.colorDao()
+
+    @Provides
+    @Singleton
+    fun provideHabitDao(medicMinderDb: MedicMinderDb) = medicMinderDb.habitDao()
+
+    @Provides
+    @Singleton
+    fun provideCategoryDao(medicMinderDb: MedicMinderDb) = medicMinderDb.categoryDao()
+
 }

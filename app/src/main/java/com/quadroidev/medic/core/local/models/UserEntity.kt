@@ -4,7 +4,7 @@ import androidx.annotation.ColorInt
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import androidx.room.TypeConverter
+import com.quadroidev.medic.core.common.enums.Gender
 
 @Entity(tableName = "user")
 data class UserEntity(
@@ -15,10 +15,4 @@ data class UserEntity(
     @ColumnInfo("image") val image: Int? = null,
     @ColumnInfo("color") @ColorInt val color: Int? = null,
     @PrimaryKey(true) @ColumnInfo("uid") val uid: Int = 0
-) {
-    @TypeConverter
-    fun fromGender(gender: Gender) = gender.name
-
-    @TypeConverter
-    fun fromString(gender: String) = Gender.valueOf(gender)
-}
+)

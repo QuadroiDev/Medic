@@ -10,7 +10,7 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 interface ColorDao {
     @Upsert
-    fun insertColor(colorEntity: ColorEntity)
+    fun upsertColor(colorEntity: ColorEntity)
 
     @Query("SELECT * FROM color")
     fun getAll(): Flow<List<ColorEntity>>

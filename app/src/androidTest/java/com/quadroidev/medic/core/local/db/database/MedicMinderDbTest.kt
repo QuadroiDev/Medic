@@ -35,8 +35,9 @@ class MedicMinderDbTest {
     @Test
     @Throws(Exception::class)
     fun writeUserAndReadInList() {
-        val user = UserEntity(name = "Pooria")
-        userDao.upsertAll(user)
+        val user = UserEntity(name = "Jack")
+        userDao.upsertUser(user)
+        // TODO fix problems for this test
 //        val byName = userDao.findWithName("george")
 //        assertEquals(byName[0], user)
     }

@@ -10,7 +10,7 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 interface IconDao {
     @Upsert
-    fun insertIcon(iconEntity: IconEntity)
+    fun upsertIcon(iconEntity: IconEntity)
 
     @Query("SELECT * FROM icon")
     fun getAll(): Flow<List<IconEntity>>
