@@ -17,7 +17,6 @@ object LocalModule {
     @Singleton
     fun provideMedicMinderDb(@ApplicationContext context: Context) =
         Room.databaseBuilder(context, MedicMinderDb::class.java, "medic_minder_database")
-            .addTypeConverter(MedicMinderDb::class)
             .build()
 
     @Provides
