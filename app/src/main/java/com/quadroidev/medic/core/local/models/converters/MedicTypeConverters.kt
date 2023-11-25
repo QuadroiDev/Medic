@@ -1,4 +1,4 @@
-package com.quadroidev.medic.core.local.models
+package com.quadroidev.medic.core.local.models.converters
 
 import androidx.room.TypeConverter
 import com.quadroidev.medic.core.common.enums.Gender
