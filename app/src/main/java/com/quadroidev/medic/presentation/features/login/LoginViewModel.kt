@@ -16,9 +16,10 @@ class LoginViewModel @Inject constructor(private val createUserUseCase: CreateUs
 
     private val _homeEventChanel: Channel<LoginEvents> = Channel()
     val homeEventChanel: Flow<LoginEvents> = _homeEventChanel.receiveAsFlow()
-    fun createUser(username:String){
+
+    fun userClickedLoginButton(phoneNumber: String) {
         viewModelScope.launch {
-            createUserUseCase.invoke(CreateUserUseCase.Params(User(username)))
+            createUserUseCase.invoke(CreateUserUseCase.Params(User(phoneNumber)))
             _homeEventChanel.send(LoginEvents.UserLoggedInSuccessfully("Log in successfully"))
         }
     }

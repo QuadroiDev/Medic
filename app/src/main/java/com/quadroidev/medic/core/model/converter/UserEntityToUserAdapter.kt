@@ -6,9 +6,9 @@ import com.quadroidev.medic.core.model.User
 
 val userEntityToUserAdapter = EntityModelAdapter<UserEntity, User>(
     toModelConverter = { entity ->
-        User(name = entity.name)
+        User(phoneNumber = entity.phoneNumber ?: "")
     },
     toEntityConverter = { model ->
-        UserEntity(name = model.name)
+        UserEntity(phoneNumber = model.phoneNumber)
     }
 )

@@ -9,7 +9,7 @@ object MedicTypeConverters {
     fun fromGender(gender: Gender) = gender.name
 
     @TypeConverter
-    fun fromStringToGender(gender: String) = Gender.valueOf(gender)
+    fun fromStringToGender(gender: String?) = gender?.let { Gender.valueOf(it) }
 
     @TypeConverter
     fun fromNotificationType(notificationType: NotificationType) = notificationType.name
