@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
@@ -17,7 +16,7 @@ import kotlinx.coroutines.launch
 import kotlin.reflect.KClass
 
 abstract class BaseFragment<VB : ViewBinding, VM : ViewModel>(
-    private val bindingInflater: (LayoutInflater, ViewGroup?, Boolean) -> VB,
+    private val bindingInflater: (LayoutInflater, ViewGroup?, isAttach: Boolean) -> VB,
     private val viewModelClass: KClass<VM>
 ) : Fragment() {
 
@@ -39,7 +38,7 @@ abstract class BaseFragment<VB : ViewBinding, VM : ViewModel>(
         return binding.root
     }
 
-    fun <T> LifecycleOwner.launchWhen(
+    fun <T> launchWhen(
         block: suspend CoroutineScope.() -> T,
         lifeCycle: Lifecycle.State
     ) {

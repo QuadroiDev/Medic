@@ -1,3 +1,3 @@
 package com.quadroidev.medic.core.model
 
-data class User(val phoneNumber: String)
+data class User(val phoneNumber: String?)
