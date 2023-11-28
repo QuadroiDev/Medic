@@ -12,7 +12,7 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 interface UserDao {
     @Upsert
-    fun upsertUser(vararg userEntity: UserEntity)
+    suspend fun upsertUser(vararg userEntity: UserEntity)
 
     @Query("SELECT * FROM user")
     fun getAll(): Flow<List<UserEntity>>
@@ -25,8 +25,8 @@ interface UserDao {
     fun findWithName(name: String): Flow<List<UserEntity>>
 
     @Delete
-    fun delete(userEntity: UserEntity)
+    suspend fun delete(userEntity: UserEntity)
 
     @Query("DELETE FROM user")
-    fun deleteAll()
+    suspend fun deleteAll()
 }

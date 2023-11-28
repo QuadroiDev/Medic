@@ -7,7 +7,6 @@ import androidx.room.PrimaryKey
 import com.quadroidev.medic.core.common.enums.NotificationType
 
 @Entity("habit")
-
 data class HabitEntity(
     @ColumnInfo("name") val name: String,
     @ColumnInfo("start_time") val startTime: Long,

@@ -1,4 +1,4 @@
-package com.quadroidev.medic.core.local.models
+package com.quadroidev.medic.core.local.models.converters
 
 import androidx.room.TypeConverter
 import com.quadroidev.medic.core.common.enums.Gender
@@ -9,7 +9,7 @@ object MedicTypeConverters {
     fun fromGender(gender: Gender) = gender.name
 
     @TypeConverter
-    fun fromStringToGender(gender: String) = Gender.valueOf(gender)
+    fun fromStringToGender(gender: String?) = gender?.let { Gender.valueOf(it) }
 
     @TypeConverter
     fun fromNotificationType(notificationType: NotificationType) = notificationType.name

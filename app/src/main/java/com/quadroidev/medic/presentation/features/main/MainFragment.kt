@@ -7,7 +7,6 @@ import com.quadroidev.medic.databinding.FragmentMainBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-
 class MainFragment : BaseFragment<FragmentMainBinding, MainViewModel>(
     FragmentMainBinding::inflate,
     MainViewModel::class
