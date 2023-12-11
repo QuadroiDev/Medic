@@ -8,7 +8,6 @@ import com.quadroidev.medic.core.model.Habit
 import javax.inject.Inject
 
 class HabitEntityToHabit @Inject constructor() : Mapper<HabitEntity, Habit> {
-
     override fun map(from: HabitEntity): Habit = Habit(
         name = from.name,
         startTime = from.startTime,

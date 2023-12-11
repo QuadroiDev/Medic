@@ -8,11 +8,8 @@ import kotlinx.coroutines.flow.Flow
 class ReminderRepositoryImpl(
     private val reminderLocalDataSource: ReminderLocalDataSource
 ) : ReminderRepository {
-    override suspend fun createReminder(habit: Habit) =
-        reminderLocalDataSource.createReminder(habit)
-
+    override suspend fun upsertHabit(habit: Habit) =
+        reminderLocalDataSource.upsertHabit(habit)
     override suspend fun getAllHabits(): Flow<List<Habit>> =
         reminderLocalDataSource.getAllHabits()
-
-
 }

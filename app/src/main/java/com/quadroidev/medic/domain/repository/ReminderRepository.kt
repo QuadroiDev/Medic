@@ -5,7 +5,7 @@ import kotlinx.coroutines.flow.Flow
 
 interface ReminderRepository {
 
-    suspend fun createReminder(habit: Habit)
+    suspend fun upsertHabit(habit: Habit)
 
     suspend fun getAllHabits(): Flow<List<Habit>>
 }

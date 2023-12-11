@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".presentation.features.createreminder.CreateReminderFragment">
+    tools:context=".presentation.features.habit.HabitFragment">
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/categoryCardView"
@@ -24,7 +24,7 @@
             android:layout_height="70dp"
             android:layout_gravity="center"
             android:contentDescription="@string/drug_picture"
-            android:src="@drawable/first_aid" />
+            android:src="@drawable/ic_first_aid" />
 
     </com.google.android.material.card.MaterialCardView>
 

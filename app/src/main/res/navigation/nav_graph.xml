@@ -22,16 +22,16 @@
         android:label="fragment_main"
         tools:layout="@layout/fragment_main" >
         <action
-            android:id="@+id/action_mainFragment_to_createReminderFragment"
-            app:destination="@id/createReminderFragment" />
+            android:id="@+id/action_mainFragment_to_habitFragment"
+            app:destination="@id/habitFragment" />
     </fragment>
     <fragment
-        android:id="@+id/createReminderFragment"
-        android:name="com.quadroidev.medic.presentation.features.createreminder.CreateReminderFragment"
+        android:id="@+id/habitFragment"
+        android:name="com.quadroidev.medic.presentation.features.habit.HabitFragment"
         android:label="fragment_create_reminder"
-        tools:layout="@layout/fragment_create_reminder" >
+        tools:layout="@layout/fragment_habit" >
         <action
-            android:id="@+id/action_createReminderFragment_to_mainFragment"
+            android:id="@+id/action_habitFragment_to_mainFragment"
             app:destination="@id/mainFragment" />
     </fragment>
 </navigation>

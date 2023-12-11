@@ -9,4 +9,5 @@
     <string name="startDate">تاریخ شروع</string>
     <string name="drugCategory">نوع داروی خود را انتخاب کنید</string>
     <string name="drug_picture">This is drug picture</string>
+    <string name="habit_name">%d pill(s) left</string>
 </resources>

@@ -4,9 +4,7 @@ import com.quadroidev.medic.domain.repository.ReminderRepository
 import javax.inject.Inject
 
 class GetAllRemindersUseCase @Inject constructor(
-    private val reminderRepository: ReminderRepository) {
-
+    private val reminderRepository: ReminderRepository
+) {
     suspend fun getAllHabits() = reminderRepository.getAllHabits()
-
-
 }

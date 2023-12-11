@@ -1,9 +1,8 @@
-package com.quadroidev.medic.presentation.features.createreminder
+package com.quadroidev.medic.presentation.features.habit
 
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.DatePicker
@@ -12,15 +11,15 @@ import androidx.lifecycle.Lifecycle
 import androidx.navigation.fragment.findNavController
 import com.quadroidev.medic.R
 import com.quadroidev.medic.core.components.base.BaseFragment
-import com.quadroidev.medic.databinding.FragmentCreateReminderBinding
+import com.quadroidev.medic.databinding.FragmentHabitBinding
 import dagger.hilt.android.AndroidEntryPoint
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
 
 @AndroidEntryPoint
-class CreateReminderFragment : BaseFragment<FragmentCreateReminderBinding, CreateReminderViewModel>(
-    FragmentCreateReminderBinding::inflate, CreateReminderViewModel::class
+class HabitFragment : BaseFragment<FragmentHabitBinding, HabitViewModel>(
+    FragmentHabitBinding::inflate, HabitViewModel::class
 ), DatePickerDialog.OnDateSetListener, TimePickerDialog.OnTimeSetListener {
 
     private val categoryList = listOf("آمپول", "کپسول", "قطره", "قرص", "اسپری")
@@ -30,7 +29,6 @@ class CreateReminderFragment : BaseFragment<FragmentCreateReminderBinding, Creat
     private val startTime = currentDate.timeInMillis
     private var count = 0
     private var categoryName = ""
-    private var drugName = ""
     private var categoryImage = 0
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -43,28 +41,28 @@ class CreateReminderFragment : BaseFragment<FragmentCreateReminderBinding, Creat
             categoryName = adapterView.getItemAtPosition(position).toString()
             when (categoryName) {
                 "آمپول" -> {
-                    binding.categoryImageView.setImageResource(R.drawable.syringe)
-                    categoryImage = R.drawable.syringe
+                    binding.categoryImageView.setImageResource(R.drawable.ic_syringe)
+                    categoryImage = R.drawable.ic_syringe
                 }
 
                 "کپسول" -> {
-                    binding.categoryImageView.setImageResource(R.drawable.capsule)
-                    categoryImage = R.drawable.capsule
+                    binding.categoryImageView.setImageResource(R.drawable.ic_capsule)
+                    categoryImage = R.drawable.ic_capsule
                 }
 
                 "قطره" -> {
-                    binding.categoryImageView.setImageResource(R.drawable.drop)
-                    categoryImage = R.drawable.drop
+                    binding.categoryImageView.setImageResource(R.drawable.ic_dropper)
+                    categoryImage = R.drawable.ic_dropper
                 }
 
                 "قرص" -> {
-                    binding.categoryImageView.setImageResource(R.drawable.pills)
-                    categoryImage = R.drawable.pills
+                    binding.categoryImageView.setImageResource(R.drawable.ic_pills)
+                    categoryImage = R.drawable.ic_pills
                 }
 
                 "اسپری" -> {
-                    binding.categoryImageView.setImageResource(R.drawable.spray)
-                    categoryImage = R.drawable.spray
+                    binding.categoryImageView.setImageResource(R.drawable.ic_spray)
+                    categoryImage = R.drawable.ic_spray
                 }
 
             }
@@ -91,9 +89,9 @@ class CreateReminderFragment : BaseFragment<FragmentCreateReminderBinding, Creat
         }
 
         binding.submitBtn.setOnClickListener {
-            drugName = binding.drugNameEditText.text.toString()
+            val drugName = binding.drugNameEditText.text.toString()
             count = binding.countEditText.text.toString().toInt()
-            viewModel.submitButtonClicked(
+            viewModel.addHabit(
                 name = drugName,
                 startTime = startTime,
                 count = count,
@@ -107,14 +105,12 @@ class CreateReminderFragment : BaseFragment<FragmentCreateReminderBinding, Creat
     }
 
     override fun onDateSet(view: DatePicker?, year: Int, month: Int, dayOfMonth: Int) {
-        Log.e("Calendar", "$year, $month, $dayOfMonth")
         currentDate.set(year, month, dayOfMonth)
         displayFormattedDate(currentDate.timeInMillis)
     }
 
     private fun displayFormattedDate(timeStamp: Long) {
         binding.dateTextView.text = dateFormatter.format(timeStamp)
-        Log.i("Formatting", timeStamp.toString())
     }
 
     override fun onTimeSet(view: TimePicker?, hourOfDay: Int, minute: Int) {
@@ -127,15 +123,14 @@ class CreateReminderFragment : BaseFragment<FragmentCreateReminderBinding, Creat
 
     private fun displayFormattedTime(timeStamp: Long) {
         binding.timeTextView.text = timeFormatter.format(timeStamp)
-        Log.i("Formatting", timeStamp.toString())
     }
 
     private fun submitReminder() {
         launchWhen({
             viewModel.eventChannel.collect {event ->
                 when(event) {
-                    is CreateReminderViewModel.SubmitEvents.SubmitSuccessfully -> {
-                        findNavController().navigate(R.id.action_createReminderFragment_to_mainFragment)
+                    is HabitViewModel.HabitEvents.HabitCreatedSuccessfully -> {
+                        findNavController().navigate(R.id.action_habitFragment_to_mainFragment)
                     }
                 }
             }

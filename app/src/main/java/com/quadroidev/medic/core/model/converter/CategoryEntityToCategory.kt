@@ -6,7 +6,6 @@ import com.quadroidev.medic.core.model.Category
 import javax.inject.Inject
 
 class CategoryEntityToCategory @Inject constructor() : Mapper<CategoryEntity, Category> {
-
     override fun map(from: CategoryEntity): Category = Category(
         categoryName = from.name,
         image = from.image

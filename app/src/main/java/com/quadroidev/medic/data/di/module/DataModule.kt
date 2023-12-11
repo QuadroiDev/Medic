@@ -5,12 +5,12 @@ import com.quadroidev.medic.core.local.db.dao.UserDao
 import com.quadroidev.medic.core.model.converter.HabitEntityToHabit
 import com.quadroidev.medic.core.model.converter.HabitToHabitEntity
 import com.quadroidev.medic.core.model.converter.UserToUserEntity
-import com.quadroidev.medic.data.local.ReminderLocalDataSource
 import com.quadroidev.medic.data.local.LoginLocalDataSource
-import com.quadroidev.medic.data.repository.ReminderRepositoryImpl
+import com.quadroidev.medic.data.local.ReminderLocalDataSource
 import com.quadroidev.medic.data.repository.LoginRepositoryImpl
-import com.quadroidev.medic.domain.repository.ReminderRepository
+import com.quadroidev.medic.data.repository.ReminderRepositoryImpl
 import com.quadroidev.medic.domain.repository.LoginRepository
+import com.quadroidev.medic.domain.repository.ReminderRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

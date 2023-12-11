@@ -19,12 +19,26 @@ class MainViewModel @Inject constructor(
     private val _habits: Channel<List<Habit>> = Channel()
     val habits: Flow<List<Habit>> = _habits.receiveAsFlow()
 
+    private val _eventChannel: Channel<AddHabitEvents> = Channel()
+    val eventChannel: Flow<AddHabitEvents> = _eventChannel.receiveAsFlow()
+
     fun getAllHabits() {
         viewModelScope.launch {
+            _eventChannel.send(AddHabitEvents.FetchAllHabitsEvent)
             getAllRemindersUseCase.getAllHabits().collect {
                 _habits.send(it)
             }
         }
+    }
+
+    fun createEvent() = viewModelScope.launch {
+        _eventChannel.send(AddHabitEvents.AddHabitSuccessfully)
+    }
+
+    sealed class AddHabitEvents {
+        data object AddHabitSuccessfully: AddHabitEvents()
+
+        data object FetchAllHabitsEvent: AddHabitEvents()
     }
 
 }

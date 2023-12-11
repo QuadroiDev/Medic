@@ -1,4 +1,4 @@
-package com.quadroidev.medic.presentation.features.createreminder
+package com.quadroidev.medic.presentation.features.habit
 
 import androidx.lifecycle.viewModelScope
 import com.quadroidev.medic.core.components.base.BaseViewModel
@@ -14,14 +14,14 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class CreateReminderViewModel @Inject constructor(
+class HabitViewModel @Inject constructor(
     private val createReminderUseCase: CreateReminderUseCase
 ) : BaseViewModel() {
 
-    private val _eventChannel: Channel<SubmitEvents> = Channel()
-    val eventChannel: Flow<SubmitEvents> = _eventChannel.receiveAsFlow()
+    private val _eventChannel: Channel<HabitEvents> = Channel()
+    val eventChannel: Flow<HabitEvents> = _eventChannel.receiveAsFlow()
 
-    fun submitButtonClicked(
+    fun addHabit(
         name: String,
         startTime: Long,
         count: Int,
@@ -32,11 +32,11 @@ class CreateReminderViewModel @Inject constructor(
             val category = Category(categoryName, categoryImage)
             val habit = Habit(name, startTime, count, category)
             createReminderUseCase.invoke(CreateReminderUseCase.Params(habit))
-            _eventChannel.send(SubmitEvents.SubmitSuccessfully(""))
+            _eventChannel.send(HabitEvents.HabitCreatedSuccessfully)
         }
     }
 
-    sealed class SubmitEvents {
-        data class SubmitSuccessfully(val message: String) : SubmitEvents()
+    sealed class HabitEvents {
+        data object HabitCreatedSuccessfully : HabitEvents()
     }
 }

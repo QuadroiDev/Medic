@@ -1,5 +1,6 @@
 package com.quadroidev.medic.data.local
 
+import com.quadroidev.medic.core.components.maper.map
 import com.quadroidev.medic.core.local.db.dao.HabitDao
 import com.quadroidev.medic.core.model.Habit
 import com.quadroidev.medic.core.model.converter.HabitEntityToHabit
@@ -12,11 +13,11 @@ class ReminderLocalDataSource(
     private val habitToHabitEntity: HabitToHabitEntity,
     private val habitEntityToHabit: HabitEntityToHabit
 ) {
-    fun createReminder(habit: Habit) {
-        habitToHabitEntity.map(habit).also { habitEntity -> habitDao.upsert(habitEntity) }
+    fun upsertHabit(habit: Habit) {
+        habitToHabitEntity.map(habit).also { habitEntity -> habitDao.upsertSpecificHabit(habitEntity) }
     }
 
     fun getAllHabits(): Flow<List<Habit>> =
-        habitDao.getAll().map { it.map { habitEntity -> habitEntityToHabit.map(habitEntity) } }
+        habitDao.getAllHabits().map { habitEntityToHabit.map(it) }
 
 }

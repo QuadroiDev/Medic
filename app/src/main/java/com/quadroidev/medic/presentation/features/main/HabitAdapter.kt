@@ -5,11 +5,11 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.quadroidev.medic.R
 import com.quadroidev.medic.core.model.Habit
 import com.quadroidev.medic.databinding.ReminderLayoutBinding
 
-class MainAdapter : ListAdapter<Habit, MainAdapter.MyViewHolder>(DIFF_UTIL) {
-
+class HabitAdapter : ListAdapter<Habit, HabitAdapter.MyViewHolder>(DIFF_UTIL) {
     companion object {
         val DIFF_UTIL = object : DiffUtil.ItemCallback<Habit>() {
             override fun areItemsTheSame(
@@ -34,7 +34,7 @@ class MainAdapter : ListAdapter<Habit, MainAdapter.MyViewHolder>(DIFF_UTIL) {
                 reminderCategoryImageView.setImageResource(habit.category.image)
                 reminderCategoryTextView.text = habit.category.categoryName
                 reminderDrugNameTextView.text = habit.name
-                drugCountTextView.text = "${habit.count} pill(s) left"
+                drugCountTextView.text = binding.root.context.getString(R.string.habit_name, habit.count)
             }
         }
     }

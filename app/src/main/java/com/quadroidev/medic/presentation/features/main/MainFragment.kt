@@ -15,31 +15,40 @@ class MainFragment : BaseFragment<FragmentMainBinding, MainViewModel>(
     FragmentMainBinding::inflate,
     MainViewModel::class
 ) {
-
-    private val adapter: MainAdapter by lazy { MainAdapter() }
+    private val adapter: HabitAdapter by lazy { HabitAdapter() }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         binding.addReminder.setOnClickListener {
-            findNavController().navigate(R.id.action_mainFragment_to_createReminderFragment)
+            viewModel.createEvent()
+            observeEvents()
         }
-        setAdapter()
 
-        observeHabits()
+        setAdapter()
+        observeEvents()
     }
 
     private fun setAdapter() {
         binding.reminderRecyclerview.adapter = adapter
         binding.reminderRecyclerview.layoutManager = LinearLayoutManager(requireContext())
-        adapter.submitList(emptyList()) // TODO: set data
     }
 
-    private fun observeHabits() {
+    private fun observeEvents() {
         viewModel.getAllHabits()
         launchWhen({
-            viewModel.habits.collect {habits ->
-                adapter.submitList(habits)
+            viewModel.eventChannel.collect {events ->
+                when(events) {
+                    is MainViewModel.AddHabitEvents.AddHabitSuccessfully -> {
+                        findNavController().navigate(R.id.action_mainFragment_to_habitFragment)
+                    }
+                    is MainViewModel.AddHabitEvents.FetchAllHabitsEvent -> {
+                        viewModel.habits.collect {habits ->
+                            adapter.submitList(habits)
+                        }
+                    }
+                }
+
             }
         }, Lifecycle.State.CREATED)
     }

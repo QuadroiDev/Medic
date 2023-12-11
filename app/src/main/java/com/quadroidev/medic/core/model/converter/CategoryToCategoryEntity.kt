@@ -11,5 +11,4 @@ class CategoryToCategoryEntity @Inject constructor() : Mapper<Category, Category
         image = from.image,
         color = null
     )
-
 }
