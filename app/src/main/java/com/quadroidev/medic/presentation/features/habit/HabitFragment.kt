@@ -22,12 +22,8 @@ class HabitFragment : BaseFragment<FragmentHabitBinding, HabitViewModel>(
     FragmentHabitBinding::inflate, HabitViewModel::class
 ), DatePickerDialog.OnDateSetListener, TimePickerDialog.OnTimeSetListener {
 
-    private val categoryList = listOf("آمپول", "کپسول", "قطره", "قرص", "اسپری")
     private val currentDate = Calendar.getInstance()
-    private val dateFormatter = SimpleDateFormat("MMMM dd, yyyy", Locale.US)
-    private val timeFormatter = SimpleDateFormat("HH:mm a", Locale.US)
     private val startTime = currentDate.timeInMillis
-    private var count = 0
     private var categoryName = ""
     private var categoryImage = 0
 
@@ -35,7 +31,7 @@ class HabitFragment : BaseFragment<FragmentHabitBinding, HabitViewModel>(
         super.onViewCreated(view, savedInstanceState)
 
         val dropDownMenu = binding.dropDownMenu
-        val adapter = ArrayAdapter(requireContext(), R.layout.category_view, categoryList)
+        val adapter = ArrayAdapter(requireContext(), R.layout.category_view, listOf("آمپول", "کپسول", "قطره", "قرص", "اسپری"))
         dropDownMenu.setAdapter(adapter)
         dropDownMenu.setOnItemClickListener { adapterView, _, position, _ ->
             categoryName = adapterView.getItemAtPosition(position).toString()
@@ -64,7 +60,6 @@ class HabitFragment : BaseFragment<FragmentHabitBinding, HabitViewModel>(
                     binding.categoryImageView.setImageResource(R.drawable.ic_spray)
                     categoryImage = R.drawable.ic_spray
                 }
-
             }
         }
 
@@ -90,7 +85,7 @@ class HabitFragment : BaseFragment<FragmentHabitBinding, HabitViewModel>(
 
         binding.submitBtn.setOnClickListener {
             val drugName = binding.drugNameEditText.text.toString()
-            count = binding.countEditText.text.toString().toInt()
+            val count = binding.countEditText.text.toString().toInt()
             viewModel.addHabit(
                 name = drugName,
                 startTime = startTime,
@@ -110,6 +105,7 @@ class HabitFragment : BaseFragment<FragmentHabitBinding, HabitViewModel>(
     }
 
     private fun displayFormattedDate(timeStamp: Long) {
+        val dateFormatter = SimpleDateFormat("MMMM dd, yyyy", Locale.US)
         binding.dateTextView.text = dateFormatter.format(timeStamp)
     }
 
@@ -122,6 +118,7 @@ class HabitFragment : BaseFragment<FragmentHabitBinding, HabitViewModel>(
     }
 
     private fun displayFormattedTime(timeStamp: Long) {
+        val timeFormatter = SimpleDateFormat("HH:mm a", Locale.US)
         binding.timeTextView.text = timeFormatter.format(timeStamp)
     }
 
