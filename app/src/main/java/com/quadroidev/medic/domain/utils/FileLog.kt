@@ -6,6 +6,11 @@ import io.grpc.android.BuildConfig
 object FileLog {
     private const val ERROR = "ERROR"
     fun e(message: String?) {
-        if (BuildConfig.DEBUG) Log.e(ERROR, " $message")
+        if (BuildConfig.DEBUG) Log.e(ERROR, "$message")
     }
+
+    fun e(exception: Throwable) {
+        e(exception.message)
+    }
+
 }
