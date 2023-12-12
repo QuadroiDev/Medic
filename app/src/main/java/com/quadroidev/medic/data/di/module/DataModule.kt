@@ -1,16 +1,24 @@
 package com.quadroidev.medic.data.di.module
 
+import com.quadroidev.medic.core.local.db.dao.HabitDao
+
 import android.content.Context
 import androidx.datastore.core.handlers.ReplaceFileCorruptionHandler
 import androidx.datastore.preferences.SharedPreferencesMigration
 import androidx.datastore.preferences.core.PreferenceDataStoreFactory
 import androidx.datastore.preferences.core.emptyPreferences
 import androidx.datastore.preferences.preferencesDataStoreFile
+
 import com.quadroidev.medic.core.local.db.dao.UserDao
+import com.quadroidev.medic.core.model.converter.HabitEntityToHabit
+import com.quadroidev.medic.core.model.converter.HabitToHabitEntity
 import com.quadroidev.medic.core.model.converter.UserToUserEntity
 import com.quadroidev.medic.data.local.LoginLocalDataSource
+import com.quadroidev.medic.data.local.ReminderLocalDataSource
 import com.quadroidev.medic.data.repository.LoginRepositoryImpl
+import com.quadroidev.medic.data.repository.ReminderRepositoryImpl
 import com.quadroidev.medic.domain.repository.LoginRepository
+import com.quadroidev.medic.domain.repository.ReminderRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -35,6 +43,17 @@ object DataModule {
         LoginRepositoryImpl(loginLocalDataSource)
 
     @Provides
+    fun provideReminderLocalDataSource(
+        habitDao: HabitDao,
+        habitEntity: HabitToHabitEntity,
+        habit: HabitEntityToHabit
+    ) =
+        ReminderLocalDataSource(habitDao, habitEntity, habit)
+
+    @Provides
+    fun provideReminderRepository(reminderLocalDataSource: ReminderLocalDataSource): ReminderRepository =
+        ReminderRepositoryImpl(reminderLocalDataSource)
+
     fun provideDataStore(@ApplicationContext context: Context) = PreferenceDataStoreFactory.create(
         ReplaceFileCorruptionHandler { emptyPreferences() },
         listOf(SharedPreferencesMigration(context, APP_PREFERENCES_NAME)),

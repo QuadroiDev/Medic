@@ -10,12 +10,12 @@ import com.quadroidev.medic.core.common.enums.NotificationType
 data class HabitEntity(
     @ColumnInfo("name") val name: String,
     @ColumnInfo("start_time") val startTime: Long,
-    @ColumnInfo("cunt") val cunt: Int = 1,
+    @ColumnInfo("count") val count: Int = 1,
     @Embedded val category: CategoryEntity,
     @ColumnInfo("description") val description: String?,
     @ColumnInfo("notification_type") val notificationType: NotificationType,
     @ColumnInfo("song") val song: Int?,
     @ColumnInfo("periodic") val periodic: Long?,
     @ColumnInfo("user_id") val userId: Int,
-    @PrimaryKey @ColumnInfo("hid") val id: Long = 0
+    @PrimaryKey(autoGenerate = true) @ColumnInfo("hid") val id: Long = 0
 )

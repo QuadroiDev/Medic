@@ -1,3 +1,13 @@
 <resources>
     <string name="app_name">Medic</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="submit">ثبت</string>
+    <string name="count">تعداد</string>
+    <string name="drugName">نام داروی خود را وارد کندی</string>
+    <string name="startTime">زمان شروع</string>
+    <string name="startDate">تاریخ شروع</string>
+    <string name="drugCategory">نوع داروی خود را انتخاب کنید</string>
+    <string name="drug_picture">This is drug picture</string>
+    <string name="habit_name">%d pill(s) left</string>
 </resources>
