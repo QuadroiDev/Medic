@@ -8,8 +8,5 @@ import javax.inject.Inject
 class CreateUserUseCase @Inject constructor(private val loginRepository: LoginRepository) :
     UseCase<CreateUserUseCase.Params, Unit>() {
     data class Params(val user: User)
-
-    override suspend fun execute(params: Params) = with(params) {
-        loginRepository.addUser(user)
-    }
+    override suspend fun execute(params: Params) = with(params) { loginRepository.addUser(user) }
 }

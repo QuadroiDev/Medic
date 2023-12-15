@@ -22,8 +22,7 @@ abstract class BaseFragment<VB : ViewBinding, VM : ViewModel>(
 
 
     private var _binding: VB? = null
-    protected val binding: VB
-        get() = _binding!!
+    protected val binding: VB get() = _binding!!
 
     protected val viewModel: VM by lazy {
         ViewModelProvider(this)[viewModelClass.java]

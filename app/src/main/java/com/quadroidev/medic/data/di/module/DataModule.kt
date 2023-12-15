@@ -7,7 +7,6 @@ import androidx.datastore.preferences.core.PreferenceDataStoreFactory
 import androidx.datastore.preferences.core.emptyPreferences
 import androidx.datastore.preferences.preferencesDataStoreFile
 import com.quadroidev.medic.core.local.db.dao.UserDao
-import com.quadroidev.medic.core.model.converter.UserToUserEntity
 import com.quadroidev.medic.data.local.LoginLocalDataSource
 import com.quadroidev.medic.data.repository.LoginRepositoryImpl
 import com.quadroidev.medic.domain.repository.LoginRepository
@@ -27,8 +26,7 @@ const val APP_PREFERENCES_NAME = "medic_minder_preferences"
 object DataModule {
 
     @Provides
-    fun provideLoginLocalDataSource(userDao: UserDao, userEntity: UserToUserEntity) =
-        LoginLocalDataSource(userDao, userEntity)
+    fun provideLoginLocalDataSource(userDao: UserDao) = LoginLocalDataSource(userDao)
 
     @Provides
     fun provideLoginRepository(loginLocalDataSource: LoginLocalDataSource): LoginRepository =
