@@ -1,7 +1,6 @@
 package com.quadroidev.medic.data.di.module
 
 import com.quadroidev.medic.core.local.db.dao.UserDao
-import com.quadroidev.medic.core.model.converter.UserToUserEntity
 import com.quadroidev.medic.data.local.LoginLocalDataSource
 import com.quadroidev.medic.data.repository.LoginRepositoryImpl
 import com.quadroidev.medic.domain.repository.LoginRepository
@@ -15,8 +14,7 @@ import dagger.hilt.components.SingletonComponent
 object DataModule {
 
     @Provides
-    fun provideLoginLocalDataSource(userDao: UserDao, userEntity: UserToUserEntity) =
-        LoginLocalDataSource(userDao, userEntity)
+    fun provideLoginLocalDataSource(userDao: UserDao) = LoginLocalDataSource(userDao)
 
     @Provides
     fun provideLoginRepository(loginLocalDataSource: LoginLocalDataSource): LoginRepository =
