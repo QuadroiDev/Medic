@@ -10,20 +10,20 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 interface HabitDao {
     @Upsert
-    fun upsert(habitEntity: HabitEntity)
+    fun upsertSpecificHabit(habitEntity: HabitEntity)
 
     @Query("SELECT * FROM habit")
-    fun getAll(): Flow<List<HabitEntity>>
+    fun getAllHabits(): Flow<List<HabitEntity>>
 
     @Query("SELECT * FROM habit WHERE user_id = :userId")
-    fun getAllForOneUser(userId: Int): Flow<List<HabitEntity>>
+    fun getAllHabitsForOneUser(userId: Int): Flow<List<HabitEntity>>
 
     @Query("SELECT * FROM habit WHERE name LIKE :name")
-    fun findWithName(name: String): Flow<List<HabitEntity>>
+    fun findSpecificHabitWithName(name: String): Flow<List<HabitEntity>>
 
     @Delete
-    fun delete(habitEntity: HabitEntity)
+    fun deleteSpecificHabit(habitEntity: HabitEntity)
 
     @Query("DELETE FROM habit")
-    fun deleteAll()
+    fun deleteAllHabits()
 }
